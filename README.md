@@ -1,2 +1,2 @@
 # react-confusion
-This a confusion project to learn about react from coursera
+This is a confusion project to learn about react from coursera
