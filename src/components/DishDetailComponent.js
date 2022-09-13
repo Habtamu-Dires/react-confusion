@@ -39,7 +39,7 @@ function RenderComments({comments}) { // making it functiona component
         
     }
    
-const DishDetail = (props)=> {
+const DishDetail = (props) => {
         if(props.dish != null){
             return(
             <div className="row">
