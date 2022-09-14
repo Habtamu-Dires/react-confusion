@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
-
+import { Card, CardBody, CardImg, CardText, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import {Link} from 'react-router-dom';
  
 function RenderDish({dish}) {   // making it functional component 
     console.log("hi why?");
@@ -8,7 +8,7 @@ function RenderDish({dish}) {   // making it functional component
         <Card className="col-12 col-md-5 m-1"> 
             <CardImg width="100%" src={dish.image} alt={dish.names}/>
             <CardBody>
-                <CardTitle>{dish.names}</CardTitle>
+                <CardTitle>{dish.name}</CardTitle>
                 <CardText>{dish.description}</CardText>
             </CardBody>
         </Card>
@@ -42,11 +42,20 @@ function RenderComments({comments}) { // making it functiona component
 const DishDetail = (props) => {
         if(props.dish != null){
             return(
-            <div className="row">
-               <RenderDish dish={props.dish} />
-               <RenderComments comments={props.dish.comments} />
+            <div className="container">
+                <Breadcrumb>
+                    <BreadcrumbItem><Link to='/menu'>Menu</Link></BreadcrumbItem>
+                    <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                </Breadcrumb>
+                <div className="col-12">
+                    <h3>{props.dish.name}</h3>
+                    <hr />
+                </div>
+                <div className="row">
+                    <RenderDish dish={props.dish} />
+                    <RenderComments comments={props.comments} />
+                </div>
             </div>    
-
             );
             
         } else {
