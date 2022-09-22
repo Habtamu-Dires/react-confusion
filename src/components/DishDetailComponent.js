@@ -1,7 +1,9 @@
 import React from "react";
 import { Card, CardBody, CardImg, CardText, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import {Link} from 'react-router-dom';
+import CommentForm from "./CommentFormComponent";
  
+
 function RenderDish({dish}) {   // making it functional component 
     console.log("hi why?");
     return(
@@ -23,7 +25,7 @@ function RenderComments({comments}) { // making it functiona component
                 <p>{comm.comment}</p> <br/>
                 <p>{"-- "}{comm.author},{"  "} 
                 {new Intl.DateTimeFormat('en-US',{year: 'numeric', month: 'short', day:'2-digit'})
-                .format(new Date(Date.parse(comm.date)))}</p>
+                  .format(new Date(Date.parse(comm.date)))}</p>
             </div>
         );
     });
@@ -32,7 +34,8 @@ function RenderComments({comments}) { // making it functiona component
             <Card className="col-12 col-md-5 m-1">
                 <CardBody>
                     <CardTitle>{"Comments"}</CardTitle>
-                        {Comment}
+                        {Comment} <br />
+                        <CommentForm />
                 </CardBody>
             </Card>               
     );
@@ -55,6 +58,7 @@ const DishDetail = (props) => {
                     <RenderDish dish={props.dish} />
                     <RenderComments comments={props.comments} />
                 </div>
+                
             </div>    
             );
             

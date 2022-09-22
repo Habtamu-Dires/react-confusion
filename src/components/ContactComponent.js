@@ -75,7 +75,7 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
-                                            required, minLength: minLength(3), maxLength: maxLength(15)
+                                            required, minLength: minLength(2), maxLength: maxLength(15)
                                         }}
                                          />
                                     <Errors
