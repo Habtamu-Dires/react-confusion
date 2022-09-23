@@ -15,30 +15,31 @@ class CommentForm extends Component {
             isModalOpen: false
         }
 
-        this.formModal = this.formModal.bind(this);
+        this.toggleFormModal = this.toggleFormModal.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    formModal() { 
+    toggleFormModal() { 
         this.setState({
             isModalOpen: !this.state.isModalOpen
         });         
     }
 
     handleSubmit(values){
-        console.log("Current state is " + JSON.stringify(values));
-        alert("Current state is "+ JSON.stringify(values));
+        this.toggleFormModal();
+        this.props.addComment(this.props.dishId, values.rating, values.author, 
+            values.comment);
     }
 
     render(){ 
         return(
             <div>
-                <Button onClick={this.formModal}>
+                <Button onClick={this.toggleFormModal}>
                     <span className="fa fa-pencil"> Send Comment</span>
                 </Button>
 
-                <Modal isOpen={this.state.isModalOpen} toggle={this.formModal} >
-                <ModalHeader toggle={this.formModal}>Submit Comment</ModalHeader>
+                <Modal isOpen={this.state.isModalOpen} toggle={this.toggleFormModal} >
+                <ModalHeader toggle={this.toggleFormModal}>Submit Comment</ModalHeader>
                 <ModalBody>
                         <LocalForm onSubmit={(values)=>this.handleSubmit(values)}>
                             <Row className="form-group">
@@ -57,7 +58,7 @@ class CommentForm extends Component {
                             <Row className="form-group">
                                 <Label htmlFor="name" md={12}>Your Name</Label>
                                 <Col md={12}>
-                                    <Control.text model=".name" name="name" id="name" 
+                                    <Control.text model=".author" name="name" id="name" 
                                       className="form-control" 
                                       placeholder="Your Name" 
                                       validators={{
@@ -66,7 +67,7 @@ class CommentForm extends Component {
                                     />
                                     <Errors
                                         className="text-danger"
-                                        model=".name"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',

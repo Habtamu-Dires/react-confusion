@@ -5,7 +5,7 @@ import CommentForm from "./CommentFormComponent";
  
 
 function RenderDish({dish}) {   // making it functional component 
-    console.log("hi why?");
+    
     return(
         <Card className="col-12 col-md-5 m-1"> 
             <CardImg width="100%" src={dish.image} alt={dish.names}/>
@@ -17,12 +17,12 @@ function RenderDish({dish}) {   // making it functional component
     );
  }
 
-function RenderComments({comments}) { // making it functiona component
+function RenderComments({comments, addComment, dishId}) { // making it functiona component
 
     const Comment = comments.map((comm)=>{
         return(
             <div key={comm.id}>
-                <p>{comm.comment}</p> <br/>
+                <p>{comm.comment}</p>
                 <p>{"-- "}{comm.author},{"  "} 
                 {new Intl.DateTimeFormat('en-US',{year: 'numeric', month: 'short', day:'2-digit'})
                   .format(new Date(Date.parse(comm.date)))}</p>
@@ -35,7 +35,7 @@ function RenderComments({comments}) { // making it functiona component
                 <CardBody>
                     <CardTitle>{"Comments"}</CardTitle>
                         {Comment} <br />
-                        <CommentForm />
+                        <CommentForm dishId={dishId} addComment={addComment}/>
                 </CardBody>
             </Card>               
     );
@@ -56,7 +56,9 @@ const DishDetail = (props) => {
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />
+                    <RenderComments comments={props.comments} 
+                        addComment= {props.addComment} 
+                        dishId={props.dish.id} />
                 </div>
                 
             </div>    
