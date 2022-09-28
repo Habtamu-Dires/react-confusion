@@ -18,7 +18,7 @@ function RenderDish({dish}) {   // making it functional component
     );
  }
 
-function RenderComments({comments, addComment, dishId}) { // making it functiona component
+function RenderComments({comments, postComment, dishId}) { // making it functional component
 
     const Comment = comments.map((comm)=>{
         return(
@@ -36,7 +36,7 @@ function RenderComments({comments, addComment, dishId}) { // making it functiona
                 <CardBody>
                     <CardTitle>{"Comments"}</CardTitle>
                         {Comment} <br />
-                        <CommentForm dishId={dishId} addComment={addComment}/>
+                        <CommentForm dishId={dishId} postComment={postComment}/>
                 </CardBody>
             </Card>               
     );
@@ -75,7 +75,7 @@ const DishDetail = (props) => {
                 <div className="row">
                     <RenderDish dish={props.dish} />
                     <RenderComments comments={props.comments} 
-                        addComment= {props.addComment} 
+                        postComment= {props.postComment} 
                         dishId={props.dish.id} />
                 </div>
                 
