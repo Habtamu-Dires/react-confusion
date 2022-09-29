@@ -4,42 +4,62 @@ import {Link} from 'react-router-dom';
 import CommentForm from "./CommentFormComponent";
 import {Loading} from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 function RenderDish({dish}) {   // making it functional component 
     
     return(
-        <Card className="col-12 col-md-5 m-1"> 
-            <CardImg width="100%" src={baseUrl + dish.image} alt={dish.names}/>
-            <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-            </CardBody>
-        </Card>
+        <div className="col-12 col-md-5 m-1">
+        <FadeTransform in 
+                transformProps = {{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
+            <Card > 
+                <CardImg width="100%" src={baseUrl + dish.image} alt={dish.names}/>
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
+        </div>
     );
  }
 
 function RenderComments({comments, postComment, dishId}) { // making it functional component
-
-    const Comment = comments.map((comm)=>{
-        return(
-            <div key={comm.id}>
-                <p>{comm.comment}</p>
-                <p>{"-- "}{comm.author},{"  "} 
-                {new Intl.DateTimeFormat('en-US',{year: 'numeric', month: 'short', day:'2-digit'})
-                  .format(new Date(Date.parse(comm.date)))}</p>
-            </div>
-        );
-    });
-
-    return(
-            <Card className="col-12 col-md-5 m-1">
-                <CardBody>
-                    <CardTitle>{"Comments"}</CardTitle>
-                        {Comment} <br />
-                        <CommentForm dishId={dishId} postComment={postComment}/>
-                </CardBody>
-            </Card>               
-    );
+ 
+        const Comment = comments.map((comm)=>{   
+            return( 
+                    <Fade in>
+                        <div key={comm.id}>
+                            <p>{comm.comment}</p>
+                            <p>{"-- "}{comm.author},{"  "} 
+                            {new Intl.DateTimeFormat('en-US',{year: 'numeric', month: 'short', day:'2-digit'})
+                            .format(new Date(Date.parse(comm.date)))}</p>
+                        </div>
+                    </Fade>
+            );
+            
+        });
+    
+    return( 
+            <div className="col-12 col-md-5 m-1">
+                        <Card >
+                            <CardBody>
+                                <CardTitle>{"Comments"}</CardTitle>
+                                    {
+                                        <Stagger in>
+                                            {Comment}
+                                        </Stagger>
+                                    } 
+                                    <br />                                
+                                    <CommentForm dishId={dishId} postComment={postComment}/>
+        
+                            </CardBody>
+                        </Card>
+                    
+            </div>               
+    ); 
         
     }
    
