@@ -27,8 +27,7 @@ class CommentForm extends Component {
 
     handleSubmit(values){
         this.toggleFormModal();
-        this.props.postComment(this.props.dishId, values.rating, values.author, 
-            values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.comment);
     }
 
     render(){ 
@@ -54,29 +53,7 @@ class CommentForm extends Component {
                                         <option>5</option>
                                       </Control.select>
                                 </Col>
-                            </Row>
-                            <Row className="form-group">
-                                <Label htmlFor="name" md={12}>Your Name</Label>
-                                <Col md={12}>
-                                    <Control.text model=".author" name="name" id="name" 
-                                      className="form-control" 
-                                      placeholder="Your Name" 
-                                      validators={{
-                                        required, minLength: minLength(2), maxLength: maxLength(15)
-                                      }}                
-                                    />
-                                    <Errors
-                                        className="text-danger"
-                                        model=".author"
-                                        show="touched"
-                                        messages={{
-                                            required: 'Required',
-                                            minLength: 'Must be greater than 2 characters',
-                                            maxLength: 'Must be 15 characters or less'
-                                        }}
-                                    />
-                                </Col>
-                            </Row>
+                            </Row>                                                    
                             <Row className="form-group">
                                 <Label htmlFor="comment" md={12}>Comment</Label>
                                 <Col md={12}>

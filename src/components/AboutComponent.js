@@ -8,8 +8,7 @@ function About(props) {
    
     const leaders = props.leaders.map((leader) => {
         return (
-                <Fade in>
-                    <div key={leader.id} className="col-12 mt-5">                    
+                <Fade in key={leader.id} className="col-12 mt-5">                                      
                             <Media tag="li">
                                 <Media left top>
                                     <Media object src={baseUrl + leader.image} alt={leader.name} />
@@ -19,8 +18,7 @@ function About(props) {
                                     <h6>{leader.designation}</h6>
                                     <p>{leader.description}</p>
                                 </Media>
-                            </Media>                    
-                    </div>
+                            </Media>                                        
                 </Fade>
             
         );
